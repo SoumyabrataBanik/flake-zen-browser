@@ -1,5 +1,3 @@
-# FINAL, OPTIMIZED, AND CORRECTED: zen-browser.nix
-# We are removing makeDesktopItem as it's not used, simplifying the signature.
 { pkgs, lib, stdenv, fetchurl, makeWrapper, wrapGAppsHook, autoPatchelfHook }:
 
 stdenv.mkDerivation rec {
@@ -17,7 +15,6 @@ stdenv.mkDerivation rec {
         wrapGAppsHook
     ];
 
-    # This list of dependencies is correct and optimized.
     buildInputs = with pkgs; [
         libGL libGLU libevent libffi libjpeg libpng libstartup_notification libvpx libwebp
         stdenv.cc.cc fontconfig libxkbcommon zlib freetype
