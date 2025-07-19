@@ -8,21 +8,31 @@
     outputs = { self, nixpkgs }: 
         let
             supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+
+            releaseData = import ./releases.nix;
             
-            forAllSystems = function: nixpkgs.lib.genAttrs supportedSystems (system: function system);
+            forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
         in
     {
             packages = forAllSystems (system:
                 let
                     pkgs = nixpkgs.legacyPackages.${system};
+                    platformData = releaseData.${system} or null;
                 in
-                {
+
+                if platformData != null then {
                     zen-browser = pkgs.callPackage ./zen-browser.nix {
                         inherit (pkgs) autoPatchelfHook wrapGAppsHook;
+                        src = pkgs.fetchurl {
+                            url = platformData.url;
+                            sha256 = platformData.sha256;
+                        };
                     };
-                }
+                } else ({ })
             );
 
-            defaultPackage = forAllSystems (system: self.packages.${system}.zen-browser);
+            defaultPackage = forAllSystems (system: 
+                self.packages.${system}.zen-browser or null
+            );
     };
 }

@@ -1,13 +1,10 @@
-{ pkgs, lib, stdenv, fetchurl, makeWrapper, wrapGAppsHook, autoPatchelfHook }:
+{ pkgs, lib, stdenv, makeWrapper, wrapGAppsHook, autoPatchelfHook, src }:
 
 stdenv.mkDerivation rec {
     pname = "zen-browser-bin";
     version = "1.14.5b";
 
-    src = fetchurl {
-        url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-x86_64.tar.xz";
-        sha256 = "ce3f8952a5e468d6569dd6d86764221bbf2d4582bd6aaa4dc6e8ba3ca314858e";
-    };
+    inherit src;
 
     nativeBuildInputs = [
         makeWrapper
@@ -55,7 +52,7 @@ stdenv.mkDerivation rec {
         cat > $out/share/applications/zen-browser.desktop << EOF
         [Desktop Entry]
         Name=Zen Browser
-        Comment=A minimalist, privacy-respecting web browser (pre-compiled binary)
+        Comment=${meta.description}
         Exec=zen
         Icon=zen
         Terminal=false
@@ -67,4 +64,14 @@ stdenv.mkDerivation rec {
 
         runHook postInstall
     '';
+
+    meta = with lib; {
+        description = "A minimalist, privacy-respecting web browser (pre-compiled binary)";
+        homepage = "https://zen-browser.app";
+        license = with licenses; [ mpl20 ];
+        maintainers = with maintainers; [ "hiskingisdone" ];
+        platforms = platforms.linux;
+        sourceProvenance = [ sourceTypes.binaryNativeCode ];
+        mainProgram = "zen";
+    };
 }
