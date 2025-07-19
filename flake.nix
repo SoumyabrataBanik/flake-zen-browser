@@ -23,7 +23,7 @@
                 if platformData != null then {
                     zen-browser = pkgs.callPackage ./zen-browser.nix {
                         inherit (pkgs) autoPatchelfHook wrapGAppsHook;
-                        version = rleaseInfo.version;
+                        version = releaseInfo.version;
                         src = pkgs.fetchurl {
                             url = platformData.url;
                             sha256 = platformData.sha256;
