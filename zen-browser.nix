@@ -1,8 +1,9 @@
-{ pkgs, lib, stdenv, makeWrapper, wrapGAppsHook, autoPatchelfHook, src }:
+{ pkgs, lib, stdenv, makeWrapper, wrapGAppsHook, autoPatchelfHook, version, src }:
 
 stdenv.mkDerivation rec {
     pname = "zen-browser-bin";
-    version = "1.14.5b";
+
+    inherit version;
 
     inherit src;
 

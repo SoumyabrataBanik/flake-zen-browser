@@ -9,7 +9,7 @@
         let
             supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
 
-            releaseData = import ./releases.nix;
+            releaseInfo = import ./releases.nix;
             
             forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
         in
@@ -17,12 +17,13 @@
             packages = forAllSystems (system:
                 let
                     pkgs = nixpkgs.legacyPackages.${system};
-                    platformData = releaseData.${system} or null;
+                    platformData = releaseInfo.sources.${system} or null;
                 in
 
                 if platformData != null then {
                     zen-browser = pkgs.callPackage ./zen-browser.nix {
                         inherit (pkgs) autoPatchelfHook wrapGAppsHook;
+                        version = rleaseInfo.version;
                         src = pkgs.fetchurl {
                             url = platformData.url;
                             sha256 = platformData.sha256;
