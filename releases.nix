@@ -1,5 +1,5 @@
 let
-  version = "1.14.9b";
+  version = "1.14.10b";
 in
 {
   inherit version;
@@ -7,12 +7,12 @@ in
   sources = {
     x86_64-linux = {
       url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-x86_64.tar.xz";
-      sha256 = "sha256:3d5264cd45d41c074eb7c929fbc2a8eeae4f3beeef765ae8b3628c7a2b4423a1";
+      sha256 = "sha256:434c0af5d076154ab068b17469a36f36cfcde0a530121e980448942e62b07660";
     };
 
     aarch64-linux = {
       url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-aarch64.tar.xz";
-      sha256 = "sha256:0ecac75f36e41934b1f204e50bb3c03f9e6e9370b8942bf82e5c983886989c92";
+      sha256 = "sha256:cb0dfb2c655f1cfa0dfc528d41f5c57cdba11a29a911f728aa71218835ae667a";
     };
   };
 }
