@@ -115,7 +115,7 @@ stdenv.mkDerivation rec {
     cat > $out/share/applications/zen-browser.desktop << EOF
     [Desktop Entry]
     Name=Zen Browser
-    Comment=${meta.description}
+    Comment=A minimalist, privacy-respecting web browser (pre-compiled binary)
     Exec=zen
     Icon=zen
     Terminal=false
@@ -127,14 +127,4 @@ stdenv.mkDerivation rec {
 
     runHook postInstall
   '';
-
-  meta = with lib; {
-    description = "A minimalist, privacy-respecting web browser (pre-compiled binary)";
-    homepage = "https://zen-browser.app";
-    license = with licenses; [ mpl20 ];
-    maintainers = with maintainers; [ "hiskingisdone" ];
-    platforms = platforms.linux;
-    sourceProvenance = [ sourceTypes.binaryNativeCode ];
-    mainProgram = "zen";
-  };
 }
