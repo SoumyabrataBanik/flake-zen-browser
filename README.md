@@ -7,8 +7,8 @@ A Nix Flake for packaging the latest binary release of the Zen Browser, ensuring
 
 This project was created to provide a complete and robust package for the Zen Browser after encountering issues with video playback (specifically YouTube livestreams) in other available solutions. This flake solves those issues by ensuring all necessary graphics and media libraries are correctly linked.
 
-<p align="center">
-    **CURRENT VERSION: 1.15.1b**
+<p style="text-align: center; font-weight: bold;">
+    CURRENT VERSION: 1.15.2b
 </p>
 
 ***
