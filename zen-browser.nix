@@ -70,11 +70,22 @@ stdenv.mkDerivation rec {
       libXrandr
       libXi
       libXext
+      libXtst
       libXcomposite
       libXdamage
       libXfixes
       libXScrnSaver
+    ])
+    ++ (with pkgs.llvm_packages21; [
+      stdenv.cc.cc.lib
     ]);
+
+  runtimeDependencies = with pkgs; [
+    curl
+    libva
+    pciutils
+    libGL
+  ];
 
   installPhase = ''
     runHook preInstall
